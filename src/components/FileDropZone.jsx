@@ -1,23 +1,24 @@
 import { useCallback, useState } from "react"
 import { useDropzone } from "react-dropzone";
 
-export const FileDropZone = () => {
+// eslint-disable-next-line react/prop-types
+export const FileDropZone = ({ onFileUpload }) => {
     const [errorMessage, setErrorMessage] = useState("");
     const [isError, setIsError] = useState(false);
 
     const onDrop = useCallback(acceptedFiles => {
-        let path = acceptedFiles[0].path;
+        const file = acceptedFiles[0];
+        const fileType = file.name.split('.').pop().toLowerCase();
 
-        if(!(path.includes(".docx") || path.includes(".doc") || path.includes(".pdf"))) {
-
-          setIsError(true);
-          setErrorMessage("Kindly upload .pdf, .docx or .doc files");
-
+        if (!["docx", "doc", "pdf"].includes(fileType)) {
+            setIsError(true);
+            setErrorMessage("Kindly upload a .pdf, .docx, or .doc file");
         } else {
-          setIsError(false);
+            setIsError(false);
+            onFileUpload(file); 
         }
 
-    }, []);
+    }, [onFileUpload]);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, multiple: false });
 
     return (
