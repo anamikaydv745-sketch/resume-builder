@@ -10,9 +10,9 @@ export const FileDropZone = ({ onFileUpload }) => {
         const file = acceptedFiles[0];
         const fileType = file.name.split('.').pop().toLowerCase();
 
-        if (!["docx", "doc", "pdf"].includes(fileType)) {
+        if (!["docx", "doc"].includes(fileType)) {
             setIsError(true);
-            setErrorMessage("Kindly upload a .pdf, .docx, or .doc file");
+            setErrorMessage("Kindly upload a .docx, or .doc file");
         } else {
             setIsError(false);
             onFileUpload(file); 
@@ -24,11 +24,11 @@ export const FileDropZone = ({ onFileUpload }) => {
     return (
         <>
           <div {...getRootProps()} className="h-[260px] w-[500px] rounded-xl border-2 border-dashed border-teal-500 flex justify-center items-center cursor-pointer">
-            <input {...getInputProps()} accept=".pdf,.docx,.doc"/>
+            <input {...getInputProps()} accept=".docx,.doc"/>
             {
               isDragActive ?
                 <p>Drop the files here ...</p> :
-                <p>Drag &apos;n&apos; drop a files here, we accept .pdf, .docx and .doc files</p>
+                <p>Drag &apos;n&apos; drop a files here, we accept .docx and .doc files</p>
             }
           </div>
           {isError ? 
