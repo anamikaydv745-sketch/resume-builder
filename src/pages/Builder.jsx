@@ -1,9 +1,9 @@
 import { Link } from "react-router";
 
-export const Editor = () => {
+export const Builder = () => {
     return (
         <div>
-            <h1>Editor Page</h1>
+            <h1>builder Page</h1>
             <Link to="/">Go back to Landing</Link>
         </div>
     );
