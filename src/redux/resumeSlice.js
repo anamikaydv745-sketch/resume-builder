@@ -1,21 +1,52 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-// Initial state of the resume sections
-const initialState = {
-  sections: [],
+const initialState = { 
+  basicDetails: {},
+  workExperience: [],
+  education: [],
+  projects: [],
+  skills: [],
+  uiState: { selectedSection: null },
+  lastSaved: "",
 };
 
-// Create the slice with auto-generated actions and reducers
 const resumeSlice = createSlice({
-  name: 'resume',
+  name: "resume",
   initialState,
   reducers: {
-    addSection: (state, action) => {
-      state.sections.push(action.payload); // Add a new section to the array
+    setBasicDetails: (state, action) => {
+      state.basicDetails = action.payload;
+    },
+    setWorkExperience: (state, action) => {
+      state.workExperience = action.payload;
+    },
+    setEducation: (state, action) => {
+      state.education = action.payload;
+    },
+    setProjects: (state, action) => {
+      state.projects = action.payload;
+    },
+    setSkills: (state, action) => {
+      state.skills = action.payload;
+    },
+    updateSectionOrder: (state, action) => {
+      const { section, newOrder } = action.payload;
+      state[section] = newOrder; // Reorders sections
+    },
+    setLastSaved: (state, action) => {
+      state.lastSaved = action.payload;
     },
   },
 });
 
-// Export the action and reducer
-export const { addSection } = resumeSlice.actions;
+export const {
+  setBasicDetails,
+  setWorkExperience,
+  setEducation,
+  setProjects,
+  setSkills,
+  updateSectionOrder,
+  setLastSaved
+} = resumeSlice.actions;
+
 export default resumeSlice.reducer;
