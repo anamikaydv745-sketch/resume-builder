@@ -6,7 +6,7 @@ export const Landing = () => {
     return (
         <>
             <Navbar />
-            <main className="bg-dots h-lvh max-w-[55%] mx-auto mt-10">
+            <main className="bg-dots h-lvh">
                 <HeroSection className="my-8"/>
             </main>
         </>

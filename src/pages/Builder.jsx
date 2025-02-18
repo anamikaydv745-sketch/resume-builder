@@ -1,10 +1,13 @@
-import { Link } from "react-router";
+import { BasicDetailsForm } from "../components/BasicDetailsForm";
+import { Navbar } from "../components/Navbar";
 
 export const Builder = () => {
     return (
-        <div>
-            <h1>builder Page</h1>
-            <Link to="/">Go back to Landing</Link>
-        </div>
+        <>
+            <Navbar />
+            <main className="bg-dots h-lvh">
+                <BasicDetailsForm />
+            </main>
+        </>
     );
 }
