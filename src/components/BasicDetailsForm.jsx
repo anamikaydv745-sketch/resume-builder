@@ -15,7 +15,7 @@ export const BasicDetailsForm = () => {
         <div className="p-4 bg-white rounded-lg shadow-md">
             <h2 className="text-lg font-semibold mb-4">Basic Details</h2>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
                 <FormField
                     label="Name" 
                     name="name" 

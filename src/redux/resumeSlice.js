@@ -25,7 +25,7 @@ const resumeSlice = createSlice({
       state.basicDetails = action.payload;
     },
     setWorkExperience: (state, action) => {
-      state.workExperience = action.payload;
+      state.workExperience.push(action.payload);
     },
     setEducation: (state, action) => {
       state.education = action.payload;
