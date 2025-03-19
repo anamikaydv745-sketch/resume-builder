@@ -6,6 +6,6 @@ import { Work } from "../icons/Work";
 export const ICON_MAPPINGS = {
     workExperience: Work,
     education: Education,
-    project: Project,
+    projects: Project,
     skills: Skills
 }
