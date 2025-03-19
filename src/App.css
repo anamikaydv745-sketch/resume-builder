@@ -1,3 +1,8 @@
 .bg-dots {
     background-image: url(./assets/dots.svg);
 }
+
+.outline-none {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
