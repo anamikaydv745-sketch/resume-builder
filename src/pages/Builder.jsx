@@ -3,7 +3,7 @@ import { BasicDetailsForm } from "../components/BasicDetailsForm";
 import { FormContainer } from "../components/FormContainer";
 import { Navbar } from "../components/Navbar";
 import { moveSectionDown, moveSectionUp } from "../redux/resumeSlice";
-//import { WorkExperienceForm } from "../components/WorkExperienceForm";
+import { FORM_COMPONENTS } from "../utils/formMappings";
 
 export const Builder = () => {
     const dispatch = useDispatch();
@@ -23,19 +23,22 @@ export const Builder = () => {
             <main className="bg-dots h-lvh">
                 <BasicDetailsForm />
                 
-                {sectionOrder.map((sectionKey, index) => (
-                    <FormContainer 
-                        key={sectionKey}
-                        sectionKey={sectionKey}
-                        title={sectionKey}
-                        canMoveUp={index > 0}
-                        canMoveDown={index < sectionOrder.length - 1}
-                        moveUp={moveUp}
-                        moveDown={moveDown}
-                    >
-                        <p>{sectionKey}</p>
-                    </FormContainer>
-                ))}
+                {sectionOrder.map((sectionKey, index) => {
+                    const FormComponent = FORM_COMPONENTS[sectionKey];
+                    return (
+                        <FormContainer 
+                            key={sectionKey}
+                            sectionKey={sectionKey}
+                            title={sectionKey}
+                            canMoveUp={index > 0}
+                            canMoveDown={index < sectionOrder.length - 1}
+                            moveUp={moveUp}
+                            moveDown={moveDown}
+                        >
+                            {FormComponent ? <FormComponent /> : <p>{sectionKey}</p>}
+                        </FormContainer>
+                    )
+                })}
             </main>
         </>
     );

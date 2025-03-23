@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { FORM_OBJECTS } from "../utils/formObjects";
+
+// Helper to generate unique IDs
+const generateId = () => {
+  return `${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 7)}`;
+};
 
 const initialState = {
-  // Basic Details Section
   basicDetails: {
     name: "",
     email: "",
@@ -11,59 +16,11 @@ const initialState = {
     location: "",
   },
 
-  // Work Experience (Array of Job Entries)
-  workExperience: [
-    /*
-    {
-      id: 1,
-      jobTitle: "Frontend Engineer",
-      company: "Google",
-      location: "Mountain View, CA",
-      startDate: "Jan 2022",
-      endDate: "Present",
-      description: ["Developed core UI components", "Optimized React performance"],
-    }
-    */
-  ],
+  workExperience: [],
+  education: [],
+  projects: [],
+  skills: [],
 
-  // Education (Array of Degree Entries)
-  education: [
-    /*
-    {
-      id: 1,
-      school: "MIT",
-      degree: "Bachelor of Computer Science",
-      major: "Computer Science",
-      location: "Massachusetts, USA",
-      startDate: "2018",
-      endDate: "2022",
-      gpa: "3.9",
-      additionalInfo: "Graduated with Honors",
-    }
-    */
-  ],
-
-  // Projects (Array of Project Entries)
-  projects: [
-    /*
-    {
-      id: 1,
-      name: "Resume Builder",
-      description: ["Built a drag-and-drop resume editor", "Integrated Redux for state management"],
-      techStack: ["React", "Redux", "Tailwind CSS"],
-      link: "https://github.com/your-repo",
-    }
-    */
-  ],
-
-  // Skills (Array of Strings)
-  skills: [
-    /*
-    "React", "Redux", "JavaScript", "TypeScript", "GraphQL"
-    */
-  ],
-
-  // Section Order (Manages Reordering of Sections in the UI)
   uiState: {
     selectedSection: null,
     sectionOrder: ["workExperience", "education", "projects", "skills"],
@@ -71,8 +28,8 @@ const initialState = {
       workExperience: true,
       education: true,
       projects: true,
-      skills: true
-    }
+      skills: true,
+    },
   },
 
   lastSaved: "",
@@ -87,51 +44,47 @@ const resumeSlice = createSlice({
       state.basicDetails = action.payload;
     },
 
-    // Work Experience CRUD
-    addWorkExperience: (state, action) => {
-      state.workExperience.push({ id: state.workExperience.length + 1, ...action.payload });
+    addEntry: (state, action) => {
+      const sectionKey = action.payload;
+      const entry = { ...FORM_OBJECTS[sectionKey], id: generateId() };
+      state[sectionKey].push(entry);
     },
-    updateWorkExperience: (state, action) => {
-      const { id, updatedData } = action.payload;
-      const index = state.workExperience.findIndex((item) => item.id === id);
-      if (index !== -1) state.workExperience[index] = { ...state.workExperience[index], ...updatedData };
+    removeEntry: (state, action) => {
+      const { sectionKey, id } = action.payload;
+      state[sectionKey] = state[sectionKey].filter((item) => item.id !== id);
     },
-    removeWorkExperience: (state, action) => {
-      state.workExperience = state.workExperience.filter(item => item.id !== action.payload);
-    },
-
-    // Education CRUD
-    addEducation: (state, action) => {
-      state.education.push({ id: state.education.length + 1, ...action.payload });
-    },
-    updateEducation: (state, action) => {
-      const { id, updatedData } = action.payload;
-      const index = state.education.findIndex((item) => item.id === id);
-      if (index !== -1) state.education[index] = { ...state.education[index], ...updatedData };
-    },
-    removeEducation: (state, action) => {
-      state.education = state.education.filter(item => item.id !== action.payload);
+    updateEntry: (state, action) => {
+      const { sectionKey, id, updatedData } = action.payload;
+      const entry = state[sectionKey].find((item) => item.id === id);
+      if (entry) Object.assign(entry, updatedData);
     },
 
-    // Projects CRUD
-    addProject: (state, action) => {
-      state.projects.push({ id: state.projects.length + 1, ...action.payload });
+    moveEntryUp: (state, action) => {
+      const { sectionKey, index } = action.payload;
+      const section = state[sectionKey];
+      if (index > 0) {
+        const temp = section[index - 1];
+        section[index - 1] = section[index];
+        section[index] = temp;
+      }
     },
-    updateProject: (state, action) => {
-      const { id, updatedData } = action.payload;
-      const index = state.projects.findIndex((item) => item.id === id);
-      if (index !== -1) state.projects[index] = { ...state.projects[index], ...updatedData };
-    },
-    removeProject: (state, action) => {
-      state.projects = state.projects.filter(item => item.id !== action.payload);
+    
+    moveEntryDown: (state, action) => {
+      const { sectionKey, index } = action.payload;
+      const section = state[sectionKey];
+      if (index < section.length - 1) {
+        const temp = section[index + 1];
+        section[index + 1] = section[index];
+        section[index] = temp;
+      }
     },
 
-    // Skills Management
+    // Skills
     setSkills: (state, action) => {
       state.skills = action.payload;
     },
 
-    // Section Ordering (Move Sections Up/Down)
+    // UI Control
     moveSectionUp: (state, action) => {
       const sectionKey = action.payload;
       const index = state.uiState.sectionOrder.indexOf(sectionKey);
@@ -163,15 +116,11 @@ const resumeSlice = createSlice({
 
 export const {
   setBasicDetails,
-  addWorkExperience,
-  updateWorkExperience,
-  removeWorkExperience,
-  addEducation,
-  updateEducation,
-  removeEducation,
-  addProject,
-  updateProject,
-  removeProject,
+  addEntry,
+  removeEntry,
+  updateEntry,
+  moveEntryUp,
+  moveEntryDown,
   setSkills,
   moveSectionUp,
   moveSectionDown,

@@ -6,7 +6,7 @@ import { OpenEye } from "../icons/OpenEye";
 import { ClosedEye } from "../icons/ClosedEye";
 
 // eslint-disable-next-line no-unused-vars
-export const FormContainer = React.memo(function FormContainer({sectionKey, title, onTitleChange, children, moveUp, moveDown, canMoveUp, canMoveDown}) {
+export const SectionWrapper = React.memo(function SectionWrapper({sectionKey, title, onTitleChange, children, moveUp, moveDown, canMoveUp, canMoveDown}) {
     const IconComponent = ICON_MAPPINGS[sectionKey];
     const dispatch = useDispatch();
     const isVisible = useSelector(state => state.resume.uiState.sectionVisibility[sectionKey]);

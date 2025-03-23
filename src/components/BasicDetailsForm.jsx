@@ -12,24 +12,17 @@ export const BasicDetailsForm = () => {
     };
 
     return (
-        <div className="p-4 bg-white rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Basic Details</h2>
+        <section className="flex flex-col gap-3 rounded-md bg-white p-6 pt-4 shadow transition-opacity duration-200 undefined">
+            
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-6 gap-3">
                 <FormField
                     label="Name" 
                     name="name" 
                     value={basicDetails.name || ""} 
                     onChange={handleChange} 
                     placeholder="Enter your full name" 
-                />
-                <FormField 
-                    label="Email" 
-                    type="email" 
-                    name="email" 
-                    value={basicDetails.email || ""} 
-                    onChange={handleChange} 
-                    placeholder="Enter your email" 
+                    colSpan="full"
                 />
                 <FormField 
                     label="Objective" 
@@ -38,13 +31,25 @@ export const BasicDetailsForm = () => {
                     value={basicDetails.objective || ""} 
                     onChange={handleChange} 
                     placeholder="Write a short objective..." 
+                    colSpan="full"
                 />
+                <FormField 
+                    label="Email" 
+                    type="email" 
+                    name="email" 
+                    value={basicDetails.email || ""} 
+                    onChange={handleChange} 
+                    placeholder="Enter your email" 
+                    colSpan="4"
+                />
+                
                 <FormField 
                     label="Phone" 
                     name="phone" 
                     value={basicDetails.phone || ""} 
                     onChange={handleChange} 
                     placeholder="Enter your phone number" 
+                    colSpan="2"
                 />
                 <FormField 
                     label="Website" 
@@ -52,6 +57,7 @@ export const BasicDetailsForm = () => {
                     value={basicDetails.website || ""} 
                     onChange={handleChange} 
                     placeholder="Your portfolio or LinkedIn URL" 
+                    colSpan="4"
                 />
                 <FormField 
                     label="Location" 
@@ -59,8 +65,9 @@ export const BasicDetailsForm = () => {
                     value={basicDetails.location || ""} 
                     onChange={handleChange} 
                     placeholder="City, Country" 
+                    colSpan="2"
                 />
             </div>
-        </div>
+        </section>
     );
 };
