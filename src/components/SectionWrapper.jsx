@@ -1,15 +1,22 @@
 import React from "react";
 import { ICON_MAPPINGS } from "../utils/iconMappings";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleSectionVisibility } from "../redux/resumeSlice";
+import { toggleSectionVisibility, updateSectionTitle } from "../redux/resumeSlice";
 import { OpenEye } from "../icons/OpenEye";
 import { ClosedEye } from "../icons/ClosedEye";
+import { Arrow } from "../icons/Arrow";
 
-// eslint-disable-next-line no-unused-vars
-export const SectionWrapper = React.memo(function SectionWrapper({sectionKey, title, onTitleChange, children, moveUp, moveDown, canMoveUp, canMoveDown}) {
+export const SectionWrapper = React.memo(function SectionWrapper({sectionKey, title, children, moveUp, moveDown, canMoveUp, canMoveDown}) {
     const IconComponent = ICON_MAPPINGS[sectionKey];
     const dispatch = useDispatch();
     const isVisible = useSelector(state => state.resume.uiState.sectionVisibility[sectionKey]);
+
+    const onTitleChange = (sectionKey, title) => {
+        dispatch(updateSectionTitle({
+            sectionKey,
+            title
+        }))
+    };
     return (
         <div className="rounded-lg bg-white p-6 pt-4 shadow-md">
             <div className="flex items-center justify-between gap-4">
@@ -30,21 +37,7 @@ export const SectionWrapper = React.memo(function SectionWrapper({sectionKey, ti
                                 type="button"
                                 onClick={() => moveUp(sectionKey)}
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="currentColor"
-                                    aria-hidden="true"
-                                    className="h-6 w-6 text-gray-400"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75"
-                                    ></path>
-                                </svg>
+                                <Arrow size="large" type="up" />
                             </button>
                         </span>
                     }
@@ -55,21 +48,7 @@ export const SectionWrapper = React.memo(function SectionWrapper({sectionKey, ti
                                 type="button"
                                 onClick={() => moveDown(sectionKey)}
                             >
-                                <svg 
-                                    xmlns="http://www.w3.org/2000/svg" 
-                                    fill="none" 
-                                    viewBox="0 0 24 24" 
-                                    strokeWidth="1.5" 
-                                    stroke="currentColor" 
-                                    aria-hidden="true" 
-                                    className="h-6 w-6 text-gray-400"
-                                >
-                                    <path 
-                                        strokeLinecap="round" 
-                                        strokeLinejoin="round" 
-                                        d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75"
-                                    ></path>
-                                </svg>
+                                <Arrow size="large" type="down" />
                             </button>
                         </span>
                     }

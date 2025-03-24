@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { BasicDetailsForm } from "../components/BasicDetailsForm";
-import { FormContainer } from "../components/FormContainer";
 import { Navbar } from "../components/Navbar";
 import { moveSectionDown, moveSectionUp } from "../redux/resumeSlice";
 import { FORM_COMPONENTS } from "../utils/formMappings";
+import { SectionEntriesContainer } from "../components/SectionEntriesContainer";
+import { SectionWrapper } from "../components/SectionWrapper";
 
 export const Builder = () => {
     const dispatch = useDispatch();
 
     const sectionOrder = useSelector(state => state.resume.uiState.sectionOrder);
+    const sectionTitles = useSelector(state => state.resume.uiState.sectionTitles);
 
     const moveUp = (sectionKey) => {
         dispatch(moveSectionUp(sectionKey));
@@ -25,18 +27,22 @@ export const Builder = () => {
                 
                 {sectionOrder.map((sectionKey, index) => {
                     const FormComponent = FORM_COMPONENTS[sectionKey];
+                    
                     return (
-                        <FormContainer 
+                        <SectionWrapper 
                             key={sectionKey}
                             sectionKey={sectionKey}
-                            title={sectionKey}
+                            title={sectionTitles[sectionKey]}
                             canMoveUp={index > 0}
                             canMoveDown={index < sectionOrder.length - 1}
                             moveUp={moveUp}
                             moveDown={moveDown}
                         >
-                            {FormComponent ? <FormComponent /> : <p>{sectionKey}</p>}
-                        </FormContainer>
+                            <SectionEntriesContainer
+                                sectionKey={sectionKey}
+                                FormComponent={FormComponent}
+                            />
+                        </SectionWrapper>
                     )
                 })}
             </main>

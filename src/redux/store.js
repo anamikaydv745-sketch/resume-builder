@@ -1,11 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit';
-import resumeReducer from './resumeSlice'; // Import the reducer from the slice
+import resumeReducer from './resumeSlice'; 
+import { loadState, saveState } from '../utils/localStorage';
 
-// Set up the Redux store with the resume reducer
+
+const preloadedState = {
+  resume: loadState()
+};
+
 const store = configureStore({
   reducer: {
-    resume: resumeReducer, // This tells Redux how to handle state changes for 'resume'
+    resume: resumeReducer, 
   },
+  preloadedState
+});
+
+store.subscribe(() => {
+  const state = store.getState();
+  saveState(state.resume);
 });
 
 export default store;

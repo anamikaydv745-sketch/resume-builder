@@ -5,12 +5,12 @@ export const BulletTextarea = ({ value = [], onChange}) => {
 
   // Initialize content
   useEffect(() => {
-    if (divRef.current) {
+    if (divRef.current && divRef.current.innerHTML.trim() === "") {
       divRef.current.innerHTML = value.length
         ? value.map(line => `<div>${line}</div>`).join("")
-        : "<div><br /></div>"; // default empty bullet
+        : "<div><br /></div>";
     }
-  }, [value]);
+  }, []);
 
   // Extract valid lines (ignores pure whitespace)
   const extractLines = () => {

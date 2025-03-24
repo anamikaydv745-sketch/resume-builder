@@ -22,7 +22,7 @@ export const FormField = ({ label, type = "text", name, value, onChange, placeho
                 />
             ) : type === "bullet" ? (
                 <BulletTextarea
-                    value={value}
+                    value={!value ? [] : value}
                     onChange={(lines) => onChange({ target: { name, value: lines } })}
                     placeholder={placeholder}
                 />

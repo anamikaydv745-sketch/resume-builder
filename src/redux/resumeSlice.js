@@ -16,13 +16,27 @@ const initialState = {
     location: "",
   },
 
-  workExperience: [],
-  education: [],
-  projects: [],
+  workExperience: [
+    {
+      id: generateId(),
+      ...FORM_OBJECTS["workExperience"]
+    }
+  ],
+  education: [
+    {
+      id: generateId(),
+      ...FORM_OBJECTS["education"]
+    }
+  ],
+  projects: [
+    {
+      id: generateId(),
+      ...FORM_OBJECTS["projects"]
+    }
+  ],
   skills: [],
 
   uiState: {
-    selectedSection: null,
     sectionOrder: ["workExperience", "education", "projects", "skills"],
     sectionVisibility: {
       workExperience: true,
@@ -30,9 +44,13 @@ const initialState = {
       projects: true,
       skills: true,
     },
+    sectionTitles: {
+      workExperience: "Work Experience",
+      education: "Education",
+      projects: "Projects",
+      skills: "Skills",
+    },
   },
-
-  lastSaved: "",
 };
 
 const resumeSlice = createSlice({
@@ -108,6 +126,11 @@ const resumeSlice = createSlice({
       state.uiState.sectionVisibility[section] = !state.uiState.sectionVisibility[section];
     },
 
+    updateSectionTitle: (state, action) => {
+      const { sectionKey, title } = action.payload;
+      state.uiState.sectionTitles[sectionKey] = title;
+    },
+
     setLastSaved: (state, action) => {
       state.lastSaved = action.payload;
     },
@@ -125,6 +148,7 @@ export const {
   moveSectionUp,
   moveSectionDown,
   toggleSectionVisibility,
+  updateSectionTitle,
   setLastSaved,
 } = resumeSlice.actions;
 
