@@ -2,13 +2,50 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume Builder</title>
-
+    <title>Resume Builder | Build Your Resume in Minutes</title>
+  
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>" />
+  
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  
+    <!-- Styles -->
     <link rel="stylesheet" href="./src/index.css" />
+  
+    <!-- SEO -->
+    <meta name="description" content="A modern Resume Builder built with React and Tailwind. Create professional resumes and export them to PDF effortlessly." />
+    <meta name="keywords" content="resume builder, react resume, tailwind resume, pdf resume, modern resume, frontend resume" />
+    <meta name="author" content="Syed Abbas" />
+  
+    <!-- Open Graph (for link previews) -->
+    <meta property="og:title" content="Resume Builder | Build Your Resume in Minutes" />
+    <meta property="og:description" content="Create beautiful, professional resumes using React + Tailwind. Download as PDF in one click." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Resume Builder" />
+  
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Resume Builder | Build Your Resume in Minutes" />
+    <meta name="twitter:description" content="Create beautiful, professional resumes using React + Tailwind. Download as PDF in one click." />
+  
+    <!-- Canonical + OG URL (dynamic) -->
+    <script>
+      const url = window.location.href;
+  
+      const canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      canonical.setAttribute("href", url);
+      document.head.appendChild(canonical);
+  
+      const og = document.createElement("meta");
+      og.setAttribute("property", "og:url");
+      og.setAttribute("content", url);
+      document.head.appendChild(og);
+    </script>
   </head>
+  
   <body class="overflow-auto md:overflow-hidden">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
