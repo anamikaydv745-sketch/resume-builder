@@ -25,19 +25,25 @@ export const SectionEntriesContainer = ({sectionKey, FormComponent}) => {
                 <>
                     {entries.map((entry, index) => {
                         return (
-                            <FormEntry
+                            <div
                                 key={index}
-                                index={index}
-                                canMoveUp={index > 0}
-                                canMoveDown={index < entries.length - 1}
-                                isDeletable={entries.length > 1}
-                                sectionKey={sectionKey}
-                                Form={FormComponent}
-                                formData={entry}
-                                moveUp={handleMoveUp}
-                                moveDown={handleMoveDown}
-                                Ondelete={handleDelete}
-                            />
+                            >
+                                <FormEntry
+                                    index={index}
+                                    canMoveUp={index > 0}
+                                    canMoveDown={index < entries.length - 1}
+                                    isDeletable={entries.length > 1}
+                                    sectionKey={sectionKey}
+                                    Form={FormComponent}
+                                    formData={entry}
+                                    moveUp={handleMoveUp}
+                                    moveDown={handleMoveDown}
+                                    Ondelete={handleDelete}
+                                />
+                                {index !== entries.length - 1 && (
+                                    <div className="mb-4 mt-6 border-t-2 border-dotted border-gray-200"></div>
+                                )}
+                            </div>
                         )
                     })}
                     <AddEntryButton sectionKey={sectionKey} />

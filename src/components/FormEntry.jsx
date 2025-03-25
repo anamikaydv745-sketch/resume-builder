@@ -5,7 +5,7 @@ import { SECTION_LABELS } from "../utils/sectionLabels";
 
 export const FormEntry = React.memo(function FormEntry({moveUp, moveDown, Ondelete, canMoveUp, canMoveDown, isDeletable, Form, formData, index, sectionKey}) {
     return (
-        <div className="relative">
+        <div className="relative mt-2.5 mb-4">
             <Form data={formData} />
             <div className="absolute right-0 top-0 flex gap-0.5 ">
                 {canMoveUp && 

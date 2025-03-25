@@ -6,7 +6,7 @@ import { OpenEye } from "../icons/OpenEye";
 import { ClosedEye } from "../icons/ClosedEye";
 import { Arrow } from "../icons/Arrow";
 
-export const SectionWrapper = React.memo(function SectionWrapper({sectionKey, title, children, moveUp, moveDown, canMoveUp, canMoveDown}) {
+export const SectionWrapper = React.memo(function SectionWrapper({sectionKey, title, children, moveUp, moveDown, canMoveUp, canMoveDown, isLast}) {
     const IconComponent = ICON_MAPPINGS[sectionKey];
     const dispatch = useDispatch();
     const isVisible = useSelector(state => state.resume.uiState.sectionVisibility[sectionKey]);
@@ -18,7 +18,7 @@ export const SectionWrapper = React.memo(function SectionWrapper({sectionKey, ti
         }))
     };
     return (
-        <div className="rounded-lg bg-white p-6 pt-4 shadow-md">
+        <div className={`rounded-lg bg-white p-6 pt-4 shadow-md ${isLast ? "mb-10" : ""}`}>
             <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-2 flex-grow">
                 {IconComponent && <IconComponent />}

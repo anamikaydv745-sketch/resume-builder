@@ -8,33 +8,57 @@ const generateId = () => {
 
 const initialState = {
   basicDetails: {
-    name: "",
-    email: "",
-    objective: "",
-    phone: "",
-    website: "",
-    location: "",
+    name: "John Doe",
+    email: "john.doe@example.com",
+    objective: "To obtain a challenging position as a Frontend Developer where I can utilize my skills to build impactful products.",
+    phone: "+1 234 567 8901",
+    website: "https://johndoe.dev",
+    location: "San Francisco, CA",
   },
 
   workExperience: [
     {
       id: generateId(),
-      ...FORM_OBJECTS["workExperience"]
+      company: "Tech Solutions Inc.",
+      jobTitle: "Frontend Developer",
+      date: "Jan 2022 – Present",
+      description: [
+        "Built and maintained reusable React components for the internal dashboard.",
+        "Collaborated with UX designers to deliver accessible and responsive UIs.",
+        "Improved load performance by 30% using code-splitting and lazy loading."
+      ],
     }
   ],
+
   education: [
     {
       id: generateId(),
-      ...FORM_OBJECTS["education"]
+      school: "State University",
+      degreeAndMajor: "B.Sc. in Computer Science",
+      date: "Aug 2018 – May 2021",
+      gpa: "3.8/4.0"
     }
   ],
+
   projects: [
     {
       id: generateId(),
-      ...FORM_OBJECTS["projects"]
+      projectName: "Portfolio Website",
+      date: "Oct 2023",
+      description: [
+        "Developed a responsive personal website using React and Tailwind CSS.",
+        "Integrated contact form with email notifications via EmailJS.",
+        "Deployed on Vercel with custom domain and SEO optimization."
+      ]
     }
   ],
-  skills: [],
+
+  skills: [
+    "Languages: JavaScript, HTML5, CSS3",
+    "Frameworks: React, Tailwind CSS",
+    "Tools: Git, VS Code, Figma",
+    "Testing: Jest, React Testing Library"
+  ],
 
   uiState: {
     sectionOrder: ["workExperience", "education", "projects", "skills"],
@@ -52,6 +76,7 @@ const initialState = {
     },
   },
 };
+
 
 const resumeSlice = createSlice({
   name: "resume",
