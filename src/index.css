@@ -5,3 +5,7 @@
     --resume-control-bar-height: 3rem;
     --resume-padding: 1.5rem;
 }
+
+button {
+    cursor: pointer;
+}
