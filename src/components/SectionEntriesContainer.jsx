@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { moveEntryUp, removeEntry } from "../redux/resumeSlice";
+import { moveEntryDown, moveEntryUp, removeEntry } from "../redux/resumeSlice";
 import { FormEntry } from "./FormEntry";
 import { AddEntryButton } from "./AddEntryButton";
 
@@ -12,7 +12,7 @@ export const SectionEntriesContainer = ({sectionKey, FormComponent}) => {
     };
 
     const handleMoveDown = (index) => {
-        dispatch(moveEntryUp({sectionKey, index}));
+        dispatch(moveEntryDown({sectionKey, index}));
     };
 
     const handleDelete = (id) => {
@@ -26,7 +26,7 @@ export const SectionEntriesContainer = ({sectionKey, FormComponent}) => {
                     {entries.map((entry, index) => {
                         return (
                             <div
-                                key={index}
+                                key={entry.id}
                             >
                                 <FormEntry
                                     index={index}
