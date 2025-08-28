@@ -61,39 +61,8 @@ src/
 - Worked with `contentEditable`, `html2pdf`, and advanced Tailwind utilities
 - Understood print optimization and dynamic state management
 
----
 
-## 🚀 Getting Started
 
-1. **Clone the Repo**
-   ```
-   git clone https://github.com/syedabbassyed/resume-builder.git
-   cd resume-builder
-   ```
 
-2. **Install Dependencies**
-   ```
-   npm install
-   ```
 
-3. **Run Locally**
-   ```
-   npm run dev
-   ```
 
-Visit `http://localhost:5173` to view the app.
-
----
-
-## 📄 License
-
-Licensed under the **MIT License**.
-
----
-
-## 🙋‍♂️ Author
-
-**Syed Abbas S A**  
-[LinkedIn](https://www.linkedin.com/in/syedabbassa/) • [GitHub](https://github.com/syedabbassyed/)
-
----
